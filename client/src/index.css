@@ -1,0 +1,23 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: black;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+a,
+p,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
