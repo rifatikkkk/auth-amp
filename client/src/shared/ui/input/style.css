@@ -1,0 +1,49 @@
+.input {
+  padding: 8px 11px 8px 31px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.88);
+  line-height: 24px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+}
+
+.input::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.input[type="password"] {
+  font-family: "Fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+
+  font-variant: normal;
+  text-transform: none;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.input[type="password"]::placeholder {
+  font-family: "SFProText-Regular";
+}
+
+#email {
+  background-image: url(../../assets/user.svg);
+  background-repeat: no-repeat;
+  background-position: 12px 11px;
+}
+
+#password {
+  background-image: url(../../assets/password.svg);
+  background-repeat: no-repeat;
+  background-position: 12px 11px;
+}
+
+.first_input {
+  margin-top: 24px;
+}
+
+.password_input {
+  padding-left: 38px; /* В дизайне именно такой отступ для поля Password */
+}
