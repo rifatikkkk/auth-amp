@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 import { Logo } from "../../shared/ui/logo";
 import { Title } from "../../shared/ui/title";
-import { FormData } from "../formData";
+import { FormData } from "../../features/ui/formData";
 
 export const SignIn: React.FC = () => {
   return (
