@@ -1,4 +1,5 @@
 .input {
+  background-color: #ffffff;
   padding: 8px 11px 8px 31px;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.88);
@@ -9,6 +10,11 @@
 
 .input::placeholder {
   color: rgba(0, 0, 0, 0.25);
+}
+
+.input:focus {
+  outline: 2px solid rgba(5, 145, 255, 0.1);
+  border-color: #1677ff;
 }
 
 .input[type="password"] {
@@ -29,9 +35,9 @@
 }
 
 #email {
-  background-image: url(../../assets/user.svg);
-  background-repeat: no-repeat;
-  background-position: 12px 11px;
+  background-image: url(../../assets/user.svg) !important;
+  background-repeat: no-repeat !important;
+  background-position: 12px 11px !important;
 }
 
 #password {

@@ -1,28 +1,38 @@
 import React from "react";
 import "./style.css";
-// import type { Control } from "react-hook-form";
+import { useController, type Control } from "react-hook-form";
+
+type UserType = {
+  email: string;
+  password: string;
+};
 
 type Props = {
-  name: string;
+  name: keyof UserType;
   type?: "text" | "email" | "password";
   placeholder?: string;
-  //   control: Control<any>;
   className?: string;
+  control: Control<UserType>;
 };
 
 export const Input: React.FC<Props> = ({
   name,
   type,
   placeholder,
-  //   control,
   className,
+  control,
 }) => {
+  const { field } = useController({
+    name,
+    control,
+  });
   return (
     <input
       id={name}
       type={type}
       className={`input ${className}`}
       placeholder={placeholder}
+      onChange={field.onChange}
     />
   );
 };

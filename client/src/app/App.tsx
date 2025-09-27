@@ -1,12 +1,7 @@
-import React from "react";
-import { AuthPage } from "../pages/auth";
+import { MainProviders } from "./providers";
 
-const App: React.FC = () => {
-  return (
-    <>
-      <AuthPage />
-    </>
-  );
+const App = () => {
+  return <MainProviders />;
 };
 
 export default App;

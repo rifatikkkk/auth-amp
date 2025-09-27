@@ -6,6 +6,7 @@ type Props = {
   disabled: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
   className?: string;
+  type?: "button" | "submit";
 };
 
 export const Button: React.FC<Props> = ({
@@ -13,12 +14,14 @@ export const Button: React.FC<Props> = ({
   disabled,
   onClick,
   className,
+  type,
 }) => {
   return (
     <button
       disabled={disabled}
       className={`button ${className}`}
       onClick={onClick}
+      type={type}
     >
       {text}
     </button>
