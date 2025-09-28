@@ -1,1 +1,1 @@
-export { constantsUser } from "./constantsUser";
+export { constantsUser, constantsErrorEmail } from "./constantsUser";

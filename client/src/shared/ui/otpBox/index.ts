@@ -1,0 +1,1 @@
+export { OtpBox } from "./otpBox";

@@ -1,0 +1,6 @@
+.otp_box {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 12px; */
+  max-width: 100%;
+}

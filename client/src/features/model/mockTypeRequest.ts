@@ -2,7 +2,7 @@ export type ApiErrorResponse = {
   success: false;
   error: {
     message: string;
-    code?: number;
+    codeRes?: number;
   };
 };
 
@@ -14,7 +14,8 @@ export type ApiSuccessResponse = {
       email: string;
     };
     token: string;
-    code?: number;
+    codeRes?: number;
+    verifyOtp: boolean;
   };
 };
 

@@ -1,9 +1,11 @@
-import { constantsUser } from "../constants";
+import { generateDigitCode } from "../../utils";
+import { constantsErrorEmail, constantsUser } from "../constants";
 import type {
   ApiErrorResponse,
   ApiResponse,
   ApiSuccessResponse,
   UserCredentials,
+  VerifyOtpParams,
 } from "../model";
 
 const delay = (ms: number): Promise<void> =>
@@ -16,17 +18,13 @@ export const loginUser = async (
 
   const { email, password } = credentials;
 
-  if (!email || !password) {
-    throw new Error("Необходимо заполнить все поля!");
-  }
-
   try {
-    if (email === "error@mail.ru") {
+    if (email === constantsErrorEmail) {
       const errorResponse: ApiErrorResponse = {
         success: false,
         error: {
           message: "Сервер временно недоступен. Попробуйте позже!",
-          code: 503,
+          codeRes: 503,
         },
       };
       return errorResponse;
@@ -36,11 +34,14 @@ export const loginUser = async (
       const successResponse: ApiSuccessResponse = {
         success: true,
         data: {
-          user: { id: 1, email: "user@mail.ru" },
+          user: { id: 1, email: constantsUser.email },
           token: "example-token-12345",
-          code: 200,
+          codeRes: 200,
+          verifyOtp: false,
         },
       };
+
+      generateDigitCode();
 
       return successResponse;
     } else {
@@ -48,7 +49,7 @@ export const loginUser = async (
         success: false,
         error: {
           message: "Неверный email или password!",
-          code: 404,
+          codeRes: 404,
         },
       };
 
@@ -60,7 +61,76 @@ export const loginUser = async (
       success: false,
       error: {
         message: "Произошла непредвиденная ошибка при авторизации",
-        code: 500,
+        codeRes: 500,
+      },
+    };
+    return errorResponse;
+  }
+};
+
+export const verifyOtpUser = async (
+  params: VerifyOtpParams
+): Promise<ApiResponse> => {
+  await delay(3000);
+
+  try {
+    const sessionCode = sessionStorage.getItem("mock-otp-code");
+
+    if (!sessionCode) {
+      const errorResponse: ApiErrorResponse = {
+        success: false,
+        error: {
+          message: "Введите код!",
+          codeRes: 404,
+        },
+      };
+      return errorResponse;
+    }
+
+    if (!params.oldSuccessResponse) {
+      return {
+        success: false,
+        error: { message: "Пользователь не найден!", codeRes: 400 },
+      };
+    }
+
+    if (sessionCode === params.otpCode) {
+      if (params.oldSuccessResponse?.success) {
+        const updateSuccessResponse: ApiSuccessResponse = {
+          ...params.oldSuccessResponse,
+          data: {
+            ...params.oldSuccessResponse.data,
+            verifyOtp: true,
+          },
+        };
+        console.log(updateSuccessResponse);
+        return updateSuccessResponse;
+      }
+      return {
+        success: false,
+        error: {
+          message: "Невалидный oldSuccessResponse",
+          codeRes: 404,
+        },
+      };
+    } else {
+      const errorResponse: ApiErrorResponse = {
+        success: false,
+        error: {
+          message: "Неверный введен код!",
+          codeRes: 404,
+        },
+      };
+
+      return errorResponse;
+    }
+  } catch (error) {
+    console.error("Неожиданная ошибка при авторизации: ", error);
+    const errorResponse: ApiErrorResponse = {
+      success: false,
+      error: {
+        message: "Произошла непредвиденная ошибка при авторизации",
+        codeRes: 500,
       },
     };
     return errorResponse;

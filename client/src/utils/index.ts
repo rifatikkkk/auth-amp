@@ -1,0 +1,1 @@
+export { generateDigitCode } from "./generateDigitCode";

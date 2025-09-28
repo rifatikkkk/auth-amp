@@ -5,3 +5,5 @@ export type {
   ApiSuccessResponse,
   ApiResponse,
 } from "./mockTypeRequest";
+
+export type { VerifyOtpParams } from "./mockTypeCodeAuth";
