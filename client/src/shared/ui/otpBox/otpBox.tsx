@@ -4,6 +4,7 @@ import { OtpInput } from "../otpInput";
 import { useOtpCodeMutation } from "../../../features/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ApiSuccessResponse } from "../../../features/model";
+import { ErrorMessage } from "../errorMessage";
 
 type Props = {
   length?: number;
@@ -15,6 +16,9 @@ export const OtpBox: React.FC<Props> = ({ length = 6 }) => {
 
   const ref = useRef<HTMLInputElement[]>([]);
   const [code, setCode] = useState<Array<string>>(new Array(length).fill(""));
+
+  const [codeRes, setCodeRes] = useState<number | undefined>(undefined);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -85,26 +89,47 @@ export const OtpBox: React.FC<Props> = ({ length = 6 }) => {
         otpCode: otpString,
       });
     }
+    if (otpString.length < 6) setErrorMessage("");
   }, [code]);
 
+  useEffect(() => {
+    if (otpCodeMutation.data) {
+      if (!otpCodeMutation.data.success) {
+        const errorCode = otpCodeMutation.data.error.codeRes;
+        const errorMessage = otpCodeMutation.data.error.message;
+        setCodeRes(otpCodeMutation.data.error.codeRes);
+
+        if (errorCode === 404) setErrorMessage(errorMessage);
+        else setErrorMessage("");
+      } else {
+        setCodeRes(otpCodeMutation.data.data.codeRes);
+      }
+    }
+  }, [otpCodeMutation.data]);
+
   return (
-    <div className="otp_box">
-      {code.map((item, index) => {
-        return (
-          <OtpInput
-            key={index}
-            myKey={index}
-            value={item}
-            onChange={(e) => handleChange(e, index)}
-            ref={(el) => {
-              if (el) {
-                ref.current[index] = el;
-              }
-            }}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-          />
-        );
-      })}
+    <div className="otp_form">
+      <div className="otp_box">
+        {code.map((item, index) => {
+          return (
+            <OtpInput
+              key={index}
+              myKey={index}
+              value={item}
+              onChange={(e) => handleChange(e, index)}
+              ref={(el) => {
+                if (el) {
+                  ref.current[index] = el;
+                }
+              }}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              className={codeRes === 404 ? "error_input" : ""}
+              disabled={codeRes === 200}
+            />
+          );
+        })}
+      </div>
+      {codeRes === 404 && <ErrorMessage text={errorMessage} />}
     </div>
   );
 };

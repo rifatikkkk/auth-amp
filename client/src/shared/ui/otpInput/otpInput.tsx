@@ -7,6 +7,8 @@ type Props = {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   ref: Ref<HTMLInputElement>;
   onKeyDown: React.KeyboardEventHandler<HTMLInputElement>;
+  className?: "error_input" | "";
+  disabled?: boolean;
 };
 
 export const OtpInput: React.FC<Props> = ({
@@ -15,6 +17,8 @@ export const OtpInput: React.FC<Props> = ({
   onChange,
   ref,
   onKeyDown,
+  className,
+  disabled,
 }) => {
   return (
     <input
@@ -22,11 +26,12 @@ export const OtpInput: React.FC<Props> = ({
       type="text"
       inputMode="numeric"
       value={value}
-      className="otp_input"
+      className={`otp_input ${className}`}
       onChange={onChange}
       ref={ref}
       onKeyDown={onKeyDown}
       maxLength={1}
+      disabled={disabled}
     />
   );
 };

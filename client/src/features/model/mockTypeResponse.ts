@@ -19,4 +19,9 @@ export type ApiSuccessResponse = {
   };
 };
 
+export type ApiLogoutResponse = {
+  success: boolean;
+  message: string;
+};
+
 export type ApiResponse = ApiErrorResponse | ApiSuccessResponse;

@@ -51,7 +51,7 @@ export const FormData: React.FC<Props> = ({ className }) => {
         name="email"
         type="email"
         placeholder="Email"
-        className="first_input"
+        classNameBox="first_input"
         control={control}
       />
       <Input

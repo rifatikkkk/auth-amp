@@ -2,6 +2,7 @@ import { generateDigitCode } from "../../utils";
 import { constantsErrorEmail, constantsUser } from "../constants";
 import type {
   ApiErrorResponse,
+  ApiLogoutResponse,
   ApiResponse,
   ApiSuccessResponse,
   UserCredentials,
@@ -81,7 +82,7 @@ export const verifyOtpUser = async (
         success: false,
         error: {
           message: "Введите код!",
-          codeRes: 404,
+          codeRes: 400,
         },
       };
       return errorResponse;
@@ -110,14 +111,14 @@ export const verifyOtpUser = async (
         success: false,
         error: {
           message: "Невалидный oldSuccessResponse",
-          codeRes: 404,
+          codeRes: 400,
         },
       };
     } else {
       const errorResponse: ApiErrorResponse = {
         success: false,
         error: {
-          message: "Неверный введен код!",
+          message: "Inavlid code",
           codeRes: 404,
         },
       };
@@ -135,4 +136,13 @@ export const verifyOtpUser = async (
     };
     return errorResponse;
   }
+};
+
+export const logoutUser = async (): Promise<ApiLogoutResponse> => {
+  await delay(1000);
+
+  return {
+    success: true,
+    message: "Выход из системы выполнен успешно!",
+  };
 };

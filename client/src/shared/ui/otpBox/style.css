@@ -1,3 +1,9 @@
+.otp_form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .otp_box {
   display: flex;
   justify-content: space-between;

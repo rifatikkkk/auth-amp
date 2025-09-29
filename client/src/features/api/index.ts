@@ -1,1 +1,1 @@
-export { loginUser, verifyOtpUser } from "./mockAuthApi";
+export { loginUser, verifyOtpUser, logoutUser } from "./mockAuthApi";

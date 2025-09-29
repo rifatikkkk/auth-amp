@@ -1,4 +1,11 @@
+.input_box {
+  width: 100%;
+  position: relative;
+}
+
 .input {
+  width: 100%;
+  box-sizing: border-box;
   background-color: #ffffff;
   padding: 8px 11px 8px 31px;
   font-size: 16px;
@@ -6,6 +13,14 @@
   line-height: 24px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
+  margin-right: 0px;
+}
+
+.input_icon {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  bottom: 12px;
 }
 
 .input::placeholder {
@@ -34,22 +49,18 @@
   font-family: "SFProText-Regular";
 }
 
-#email {
-  background-image: url(../../assets/user.svg) !important;
-  background-repeat: no-repeat !important;
-  background-position: 12px 11px !important;
-}
-
-#password {
-  background-image: url(../../assets/password.svg);
-  background-repeat: no-repeat;
-  background-position: 12px 11px;
-}
-
 .first_input {
   margin-top: 24px;
 }
 
 .password_input {
   padding-left: 38px; /* В дизайне именно такой отступ для поля Password */
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px #ffffff inset !important;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.88) !important;
 }

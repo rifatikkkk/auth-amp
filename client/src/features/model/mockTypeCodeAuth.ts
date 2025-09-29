@@ -1,4 +1,4 @@
-import type { ApiSuccessResponse } from "./mockTypeRequest";
+import type { ApiSuccessResponse } from "./mockTypeResponse";
 
 export type VerifyOtpParams = {
   oldSuccessResponse: ApiSuccessResponse | null;
