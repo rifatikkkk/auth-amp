@@ -89,7 +89,10 @@ export const OtpBox: React.FC<Props> = ({ length = 6 }) => {
         otpCode: otpString,
       });
     }
-    if (otpString.length < 6) setErrorMessage("");
+    if (otpString.length < 6) {
+      setCodeRes(0);
+      setErrorMessage("");
+    }
   }, [code]);
 
   useEffect(() => {
@@ -123,7 +126,9 @@ export const OtpBox: React.FC<Props> = ({ length = 6 }) => {
                 }
               }}
               onKeyDown={(e) => handleKeyDown(e, index)}
-              className={codeRes === 404 ? "error_input" : ""}
+              className={
+                codeRes === 404 && code.length >= 6 ? "error_input" : ""
+              }
               disabled={codeRes === 200}
             />
           );
