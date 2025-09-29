@@ -7,6 +7,15 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
+## Setup settings
+
+1. add .env file with next template:
+  - VITE_EMAIL=user@mail.ru
+  - VITE_PASSWORD=password
+  - VITE_ERROR_EMAIL=error@mail.ru
+2. execute a command `npm install` for install all dependencies
+3. execute a command `npm run dev` for start client project in `dev` mode
+
 ## React Compiler
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
